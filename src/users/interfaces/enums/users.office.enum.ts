@@ -1,4 +1,4 @@
 export enum OfficeEnum {
   ADMIN = 'Administrador',
-  GARCOM = 'Garçom'
+  GARCOM = 'Garçom',
 }
