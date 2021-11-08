@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { FoodsModule } from './foods/foods.module';
 import { DemandsModule } from './demands/demands.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,8 +13,7 @@ import { MongooseModule } from '@nestjs/mongoose';
     UsersModule,
     FoodsModule,
     DemandsModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

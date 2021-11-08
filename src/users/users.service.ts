@@ -17,7 +17,7 @@ export class UsersService {
   }
 
   async updateUser(userId: string, updateUser: UpdateUserDto): Promise<void> {
-    await this.verifyUserExistence(userId);
+    await this.verifyUserExistenceById(userId);
 
     await this.usersModel.findOneAndUpdate(
       { _id: userId },
@@ -29,16 +29,20 @@ export class UsersService {
     return await this.usersModel.find();
   }
 
+  async findUserByEmail(email: string): Promise<Users> {
+    return await this.usersModel.findOne({ email });
+  }
+
   async deleteUserById(userId: string): Promise<void> {
-    await this.verifyUserExistence(userId);
+    await this.verifyUserExistenceById(userId);
     await this.usersModel.findOneAndDelete({ _id: userId });
   }
 
-  async verifyUserExistence(userId: string): Promise<void> {
+  async verifyUserExistenceById(userId: string): Promise<void> {
     const userFound = await this.usersModel.findOne({ _id: userId }).exec();
 
     if (!userFound) {
       throw new NotFoundException(`User with id ${userId} not found !`);
     }
-  } 
+  }
 }
