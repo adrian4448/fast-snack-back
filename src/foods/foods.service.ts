@@ -7,7 +7,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { NewFoodDto } from './dtos/new-food.dto';
 import { UpdateFoodDto } from './dtos/update-food.dto';
-import { FoodDocument, Foods } from './interfaces/foods.entity';
+import { FoodDocument, Foods } from './interfaces/foods.schema';
 
 @Injectable()
 export class FoodsService {
@@ -25,7 +25,7 @@ export class FoodsService {
     foodId: string,
     updateFoodDto: UpdateFoodDto,
   ): Promise<void> {
-    await this.verifyFoodExistence(foodId);
+    await this.verifyFoodExistenceById(foodId);
     await this.foodsModel.findOneAndUpdate(
       { _id: foodId },
       { $set: updateFoodDto },
@@ -37,19 +37,26 @@ export class FoodsService {
   }
 
   async findFoodById(foodId: string): Promise<Foods> {
-    await this.verifyFoodExistence(foodId);
+    await this.verifyFoodExistenceById(foodId);
     return await this.foodsModel.findOne({ _id: foodId }).exec();
   }
 
   async deleteFoodById(foodId: string): Promise<void> {
-    await this.verifyFoodExistence(foodId);
+    await this.verifyFoodExistenceById(foodId);
     await this.foodsModel.findOneAndDelete({ _id: foodId }).exec();
   }
 
-  private async verifyFoodExistence(foodId: string) {
+  private async verifyFoodExistenceById(foodId: string) {
     const foodFound = await this.foodsModel.findOne({ _id: foodId }).exec();
     if (!foodFound) {
       throw new NotFoundException(`Food with ID: ${foodId} not found !`);
+    }
+  }
+
+  async verifyFoodExistenceByName(foodName: string) {
+    const foodFound = await this.foodsModel.findOne({ name: foodName }).exec();
+    if (!foodFound) {
+      throw new NotFoundException(`Food with name: ${foodName} not found !`);
     }
   }
 

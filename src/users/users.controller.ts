@@ -13,7 +13,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { NewUserDto } from './dtos/new-user.dto';
 import { UpdateUserDto } from './dtos/update-user.dto';
-import { Users } from './interfaces/users.entity';
+import { Users } from './interfaces/users.schema';
 import { UsersService } from './users.service';
 
 @Controller('/users')

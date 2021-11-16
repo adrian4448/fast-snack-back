@@ -14,7 +14,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { NewFoodDto } from './dtos/new-food.dto';
 import { UpdateFoodDto } from './dtos/update-food.dto';
 import { FoodsService } from './foods.service';
-import { Foods } from './interfaces/foods.entity';
+import { Foods } from './interfaces/foods.schema';
 
 @Controller('/foods')
 export class FoodsController {
