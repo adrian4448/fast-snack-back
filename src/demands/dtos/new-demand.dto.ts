@@ -1,6 +1,5 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { ArrayMinSize, IsNotEmpty, IsString } from 'class-validator';
 import { FoodDto } from '../../foods/dtos/food.dto';
-import { StatusEnum } from '../interfaces/enums/demand.status.enum';
 
 export class NewDemandDto {
   @IsNotEmpty()
@@ -8,8 +7,6 @@ export class NewDemandDto {
   table: string;
 
   @IsNotEmpty()
+  @ArrayMinSize(1)
   foods: Array<FoodDto>;
-
-  @IsNotEmpty()
-  status: StatusEnum;
 }
