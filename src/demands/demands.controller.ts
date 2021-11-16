@@ -5,9 +5,11 @@ import {
   Param,
   Patch,
   Post,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { FoodDto } from 'src/foods/dtos/food.dto';
 import { DemandsService } from './demands.service';
 import { NewDemandDto } from './dtos/new-demand.dto';
@@ -18,12 +20,14 @@ export class DemandsController {
   constructor(private readonly demandsService: DemandsService) {}
 
   @UsePipes(ValidationPipe)
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   async createDemand(@Body() newDemandDto: NewDemandDto): Promise<Demand> {
     return await this.demandsService.createNewDemand(newDemandDto);
   }
 
   @Get()
+  @UseGuards(AuthGuard('jwt'))
   async getAllDemands(): Promise<Array<Demand>> {
     return await this.demandsService.findAllDemands();
   }
@@ -34,6 +38,7 @@ export class DemandsController {
   }
 
   @UsePipes(ValidationPipe)
+  @UseGuards(AuthGuard('jwt'))
   @Patch('/demandItens/:demandId')
   async updateDemandItens(
     @Param('demandId') demandId: string,
@@ -43,6 +48,7 @@ export class DemandsController {
   }
 
   @Patch('/status/:demandId/:status')
+  @UseGuards(AuthGuard('jwt'))
   async alterDemandStatus(
     @Param('demandId') demandId: string,
     @Param('status') demandStatus: string,
