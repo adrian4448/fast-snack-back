@@ -14,12 +14,14 @@ import {
   ApiAcceptedResponse,
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { FoodDto } from 'src/foods/dtos/food.dto';
 import { DemandsService } from './demands.service';
 import { NewDemandDto } from './dtos/new-demand.dto';
 import { Demand } from './interfaces/demands.schema';
 
+@ApiTags('Pedidos')
 @Controller('/demands')
 export class DemandsController {
   constructor(private readonly demandsService: DemandsService) {}

@@ -15,12 +15,14 @@ import {
   ApiAcceptedResponse,
   ApiBadRequestResponse,
   ApiCreatedResponse,
+  ApiTags,
 } from '@nestjs/swagger';
 import { NewFoodDto } from './dtos/new-food.dto';
 import { UpdateFoodDto } from './dtos/update-food.dto';
 import { FoodsService } from './foods.service';
 import { Foods } from './interfaces/foods.schema';
 
+@ApiTags('Alimentos')
 @Controller('/foods')
 export class FoodsController {
   constructor(private readonly foodsService: FoodsService) {}
