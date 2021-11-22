@@ -46,7 +46,7 @@ export class DemandsController {
     return await this.demandsService.findAllDemands();
   }
 
-  @Get(':/demandId')
+  @Get('/:demandId')
   @UsePipes(ValidationPipe)
   @UseGuards(AuthGuard('jwt'))
   @ApiAcceptedResponse({ description: 'Retorna um pedido através de seu ID' })
