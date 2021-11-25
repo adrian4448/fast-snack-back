@@ -51,7 +51,6 @@ export class FoodsController {
   }
 
   @Get()
-  @UseGuards(AuthGuard('jwt'))
   @ApiAcceptedResponse({
     description:
       'Retorna um array contendo todos os alimentos cadastrados no sistema',
@@ -61,7 +60,6 @@ export class FoodsController {
   }
 
   @Get('/:foodId')
-  @UseGuards(AuthGuard('jwt'))
   @ApiAcceptedResponse({ description: 'Retorna um Alimento através de seu ID' })
   @ApiBadRequestResponse({ description: 'Não existe alimento com este ID' })
   async getFoodById(@Param('foodId') foodId: string): Promise<Foods> {
