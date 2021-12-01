@@ -48,7 +48,6 @@ export class DemandsController {
 
   @Get('/:demandId')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthGuard('jwt'))
   @ApiAcceptedResponse({ description: 'Retorna um pedido através de seu ID' })
   @ApiBadRequestResponse({
     description: 'Pedido com este ID não foi encontrado',
