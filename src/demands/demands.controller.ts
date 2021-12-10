@@ -5,6 +5,7 @@ import {
   Param,
   Patch,
   Post,
+  Put,
   UseGuards,
   UsePipes,
   ValidationPipe,
@@ -73,7 +74,7 @@ export class DemandsController {
     await this.demandsService.updateDemandItens(demandId, demandItens);
   }
 
-  @Patch('/status/:demandId/:status')
+  @Put('/status/:demandId/:status')
   @UseGuards(AuthGuard('jwt'))
   @ApiAcceptedResponse({ description: 'Altera o status de um pédido' })
   @ApiBadRequestResponse({
