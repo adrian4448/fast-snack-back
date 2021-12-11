@@ -1,6 +1,5 @@
 import {
   BadRequestException,
-  BadRequestException,
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
@@ -22,17 +21,6 @@ export class DemandsService {
 
   async createNewDemand(newDemandDto: NewDemandDto): Promise<Demand> {
     const demandToSave = new this.demandModel(newDemandDto);
-
-    const demandInThisTable = await this.demandModel
-      .findOne({
-        table: demandToSave.table,
-      })
-      .exec();
-
-    if (demandInThisTable.status != StatusEnum.DONE) {
-      throw new BadRequestException(`Unable to create an order for this table`);
-    }
-
     demandToSave.status = StatusEnum.WAITING;
     return await demandToSave.save();
   }
