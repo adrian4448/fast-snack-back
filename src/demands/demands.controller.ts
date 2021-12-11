@@ -29,7 +29,6 @@ export class DemandsController {
 
   @Post()
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthGuard('jwt'))
   @ApiCreatedResponse({ description: 'Cadastra um novo Pedido' })
   @ApiBadRequestResponse({
     description: 'Falta preencher campos no JSON de request',
